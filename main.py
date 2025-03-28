@@ -2,14 +2,12 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 import musicLibrary
-import requests
 from gtts import gTTS
 import pygame
 import os 
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
-newsapi = "<Your Key Here>"
 
 
 def speak_old(text):
@@ -50,18 +48,6 @@ def processCommand(c):
         link =  musicLibrary.music[song]
         webbrowser.open(link)
 
-    elif "news" in c.lower():
-        r = requests.get(f"https://newsapi.org/v2/top-headlines?country=in&apiKey={newsapi}")
-        if r.status_code == 200:
-            # Parse the JSON response
-            data = r.json()
-            
-            # Extract the articles
-            articles = data.get('articles', [])
-            
-            # Print the headlines
-            for article in articles:
-             speak(article['title'])
     
 
 if __name__ == "__main__":
